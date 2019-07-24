@@ -7,7 +7,7 @@ export const addEvent = ({
   endDate =0
 } = {}) => ({
   type: "ADD_EVENT",
-  Event: {
+  event: {
     id: uuidv4(),
     description,
     startDate,
