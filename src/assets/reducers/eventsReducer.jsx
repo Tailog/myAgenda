@@ -1,4 +1,11 @@
-const eventReducerDefaultState = [];
+//Firebase
+// import {firebaseConfig} from '../firebase/config';
+// const firebase = require("firebase");
+// require("firebase/firestore");
+
+
+let eventReducerDefaultState = [];
+
 
 export default (state = eventReducerDefaultState, action) => {
   switch (action.type) {
@@ -11,7 +18,6 @@ export default (state = eventReducerDefaultState, action) => {
     case "EDIT_EVENT":
       return state.map(e => {
         if (e.id === action.id) {
-          console.log(action);
           return {
             ...e,
             ...action.updates

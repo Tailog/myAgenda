@@ -25,3 +25,5 @@ export const editEvent = (id, updates) => ({
   updates,
   id
 });
+//GET_Events
+export const getEvents = ()=>({type:"GET_EVENTS"})
