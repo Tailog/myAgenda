@@ -11,6 +11,7 @@ export default (state = eventReducerDefaultState, action) => {
     case "EDIT_EVENT":
       return state.map(e => {
         if (e.id === action.id) {
+          console.log(action);
           return {
             ...e,
             ...action.updates
