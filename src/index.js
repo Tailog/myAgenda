@@ -4,31 +4,33 @@ import ReactDOM from "react-dom";
 import configureStore from "./assets/store/configureStore";
 import * as actions from "./assets/actions/events";
 import App from "./App.jsx";
-//Firebase
-import { firebaseConfig } from "./assets/firebase/config";
-const firebase = require("firebase");
-require("firebase/firestore");
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+import {getData} from "./assets/firebase/config";
 
-firebase
-  .firestore()
-  .collection("events")
-  .get()
-  .then((snap) => {
-    snap.forEach((doc)=>{
-      store.dispatch(actions.addEvent(doc.data()))
-    })
-  });
 
 const store = configureStore();
 
+getData(store,actions);
+
+const event1 = {
+  description: "Event 1",
+  startDate: 0,
+  endDate: 15
+};
+const event2 = {
+  description: "Event 2",
+  startDate: 15,
+  endDate: 25
+};
 setTimeout(() => {
   console.log(store.getState());
-}, 1500);
+}, 4000);
 
 //TESTING
-// store.dispatch(actions.addEvent({ description: "Hello" }));
+setTimeout(()=>{
+  // store.dispatch(actions.removeEventDb("a3r1V19olNOxdyDS0g4E"));
+  // store.dispatch(actions.addEventDb(event1));
+  store.dispatch(actions.editEventDb("HJYYecuSK2IjPUdAUkRr",{description:"Caca",startDate:250}));
+},2000)
 
 // console.log(store.getState());
 

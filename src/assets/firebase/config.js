@@ -1,5 +1,9 @@
+//Firebase
+const firebase = require("firebase");
+require("firebase/firestore");
+
 // Your web app's Firebase configuration
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyALxRMGbywhl6SvxH-A6PO8NSIe0rQJp3U",
   authDomain: "myagenda-7f541.firebaseapp.com",
   databaseURL: "https://myagenda-7f541.firebaseio.com",
@@ -9,3 +13,20 @@ export const firebaseConfig = {
   appId: "1:1091494386090:web:d9e65a2bcfc24f3f"
 };
 
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+export const db = firebase.firestore();
+
+export const getData = (store,actions) =>{
+  firebase
+  .firestore()
+  .collection("events")
+  .get()
+  .then((snap) => {
+    snap.forEach((doc)=>{
+      let id = doc.id;
+      store.dispatch(actions.addEvent({...doc.data(),id}))
+    })
+  });
+}
