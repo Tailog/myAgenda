@@ -7,6 +7,10 @@ import {
   getEventsError,
   getEventsPending
 } from "./assets/reducers/eventsReducer";
+//Styles Component
+import Loading from './components/LoadingScreen';
+//Component
+import DashBoardEvents from './components/DashBoardEvents'
 
 class App extends Component {
   constructor(props) {
@@ -20,17 +24,14 @@ class App extends Component {
   }
   shouldComponentRender() {
     const { pending } = this.props;
-    console.log(this.props);
     if (pending === false) {
-      console.log("not done");
       return true;
     }
-    console.log("done");
     return false;
   }
   render() {
-    if (!this.shouldComponentRender()) return <h1>Loading</h1>;
-    return <h1>Hello</h1>;
+    if (!this.shouldComponentRender()) return <Loading/>;
+    return <DashBoardEvents/>;
   }
 }
 
