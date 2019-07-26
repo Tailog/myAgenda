@@ -1,6 +1,25 @@
 import { db } from "./../firebase/config";
-const uuidv4 = require("uuid/v4");
 
+/********SETUP EVENTS WITH STORE***********/
+export const fetchEventsPending = () => {
+  return {
+    type: "FETCH_EVENTS_PENDING"
+  };
+};
+export const fetchEventsSuccess = events => {
+  return {
+    type: "FETCH_EVENTS_SUCCESS",
+    events: events
+  };
+};
+export const fetchEventsError = error => {
+  return {
+    type: "FETCH_EVENTS_ERROR",
+    error: error
+  };
+};
+/***********************************/
+/******** ACTIONS EVENTS **********/
 //ADD_Event State
 export const addEvent = ({
   id,
@@ -17,13 +36,18 @@ export const addEvent = ({
   }
 });
 //ADD_Event DB
-export const addEventDb = eventData => {
+export const addEventDb = ({description = "",startDate=0,endDate=0}) => {
+  let eventData = {
+    description,
+    startDate,
+    endDate
+  }
   return dispatch => {
     db.collection("events")
       .add(eventData)
-      .then((snap) => {
+      .then(snap => {
         let id = snap.id;
-        dispatch(addEvent({...eventData,id}));
+        dispatch(addEvent({ ...eventData, id }));
       });
   };
 };
@@ -35,15 +59,15 @@ export const removeEvent = ({ id } = {}) => ({
 });
 //REMOVE_Event DB
 export const removeEventDb = id => {
-  return dispatch =>{
+  return dispatch => {
     db.collection("events")
       .doc(id)
       .delete()
-      .then(() =>{
-        dispatch(removeEvent({id}))
+      .then(() => {
+        dispatch(removeEvent({ id }));
       });
-  }
-}
+  };
+};
 //EDIT_Event
 export const editEvent = (id, updates) => ({
   type: "EDIT_EVENT",
@@ -51,15 +75,14 @@ export const editEvent = (id, updates) => ({
   id
 });
 //EDIT_EVENT DB
-export const editEventDb = (id,updates) => {
-  return dispatch =>{
+export const editEventDb = (id, updates) => {
+  return dispatch => {
     db.collection("events")
       .doc(id)
       .update(updates)
-      .then(() =>{
-        dispatch(editEvent(id,updates))
+      .then(() => {
+        dispatch(editEvent(id, updates));
       });
-  }
-}
-//GET_Events
-export const getEvents = () => ({ type: "GET_EVENTS" });
+  };
+};
+/***********************************/

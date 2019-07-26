@@ -17,16 +17,3 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore();
-
-export const getData = (store,actions) =>{
-  firebase
-  .firestore()
-  .collection("events")
-  .get()
-  .then((snap) => {
-    snap.forEach((doc)=>{
-      let id = doc.id;
-      store.dispatch(actions.addEvent({...doc.data(),id}))
-    })
-  });
-}
