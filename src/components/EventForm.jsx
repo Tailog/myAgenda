@@ -30,11 +30,30 @@ export default class EventForm extends Component {
     endDate = moment(endDate);
     this.setState(() => ({ endDate }));
   };
+  onSubmit=(e)=>{
+    e.preventDefault();
+    if (!this.state.description) {
+      //Set error state equal to 'Please provide description
+      this.setState(() => ({
+        error: "Please provide description"
+      }));
+    } else {
+      this.setState(() => ({ error: "" }));
+      this.props.onSubmit({
+        description: this.state.description,
+        startDate: this.state.startDate.unix(),
+        endDate: this.state.endDate.unix(),
+      });
+    }
+  }
   render() {
     return (
       <div>
         <Container>
           <Typography variant="h3">Create your event</Typography>
+          {this.state.error && (
+            <Typography variant="h5">{this.state.error}</Typography>
+          )}
           <form onSubmit={this.onSubmit}>
             <input
               type="text"
@@ -43,27 +62,27 @@ export default class EventForm extends Component {
               value={this.state.description}
               onChange={this.handleDescriptionChange}
             />
-            <br/>
+            <br />
             <TextField
               label="Event Start"
               type="date"
-              defaultValue={this.state.startDate}
+              defaultValue={this.state.startDate.format("YYYY-MM-DD")}
               InputLabelProps={{
                 shrink: true
               }}
               onChange={this.handleStartDateChange.bind(this)}
             />
-            <br/>
+            <br />
             <TextField
               label="Event End"
               type="date"
-              defaultValue={this.state.startDate}
+              defaultValue={this.state.startDate.format("YYYY-MM-DD")}
               InputLabelProps={{
                 shrink: true
               }}
               onChange={this.handleEndDateChange.bind(this)}
             />
-            <br/>
+            <br />
             <button type="submit">Add Event</button>
           </form>
         </Container>
