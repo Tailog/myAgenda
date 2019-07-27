@@ -6,16 +6,14 @@ import AppRouter from "./assets/routes/AppRoute.jsx";
 
 //Font
 import "typeface-roboto";
-import Typography from "@material-ui/core/Typography";
+
 
 //Create Store
 const store = configureStore();
 
 const jsx = (
   <Provider store={store}>
-    <Typography>
       <AppRouter />
-    </Typography>
   </Provider>
 );
 

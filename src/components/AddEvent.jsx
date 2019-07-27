@@ -1,11 +1,11 @@
-import React from 'react';
-import {connect} from 'react-redux'
-// import EventForm from './EventForm';
+import React from "react";
+import { connect } from "react-redux";
+import EventForm from "./EventForm";
 
-const AddEvent = (props) =>(
+const AddEvent = props => (
   <div>
-    <h1>Add Event</h1>
+    <EventForm />
   </div>
-)
+);
 
-export default connect()(AddEvent)
+export default connect()(AddEvent);

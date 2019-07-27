@@ -1,7 +1,10 @@
-import React from 'react';
+import React from "react";
+import Typography from "@material-ui/core/Typography";
 
-export default ()=>(
+export default () => (
   <div>
-    <h2>Here's the events</h2>
+    <Typography>
+      <h2>Here's the events</h2>
+    </Typography>
   </div>
-)
+);
