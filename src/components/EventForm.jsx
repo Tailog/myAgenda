@@ -12,7 +12,6 @@ export default class EventForm extends Component {
       description: props.expense ? props.expense.description : "",
       startDate: props.expense ? moment(props.expense.createdAt) : moment(),
       endDate: props.expense ? moment(props.expense.createdAt) : moment(),
-      calendarFocused: false,
       error: ""
     };
   }

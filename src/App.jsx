@@ -17,7 +17,6 @@ class App extends Component {
     super(props);
     this.shouldComponentRender = this.shouldComponentRender.bind(this);
   }
-
   componentWillMount() {
     const { fetchEventsAction } = this.props;
     fetchEventsAction();
@@ -30,8 +29,11 @@ class App extends Component {
     return false;
   }
   render() {
-    if (!this.shouldComponentRender()) return <Loading/>;
-    return <DashBoardEvents/>;
+    if (!this.shouldComponentRender()) {
+      return <Loading/>;
+    }else{
+      return <DashBoardEvents/>;
+    }
   }
 }
 
