@@ -54,8 +54,7 @@ export const eventsReducer = (state = eventReducerDefaultState, action) => {
       return state;
   }
 };
-export const getEvents = state => {
-  return state.events.events
-} 
+
+export const getEvents = state => state.events.events;
 export const getEventsPending = state => state.events.pending;
 export const getEventsError = state => state.events.error;
