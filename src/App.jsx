@@ -10,7 +10,7 @@ import {
 //Styles Component
 import Loading from './components/LoadingScreen';
 //Component
-import DashBoardEvents from './components/DashBoardEvents'
+import DashBoardEvents from './components/DashBoardEvents';
 
 class App extends Component {
   constructor(props) {

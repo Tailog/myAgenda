@@ -1,8 +1,3 @@
-//Firebase
-// import {firebaseConfig} from '../firebase/config';
-// const firebase = require("firebase");
-// require("firebase/firestore");
-
 let eventReducerDefaultState = {
   pending: false,
   events: [],
@@ -26,21 +21,26 @@ export const eventsReducer = (state = eventReducerDefaultState, action) => {
     case "FETCH_EVENTS_ERROR":
       return {
         ...state,
-        pending:false,
+        pending: false,
         error: action.error
       };
     //******EVENTS ACTIONS *******//
     case "ADD_EVENT":
       return {
         ...state,
-        events: [...state.events,action.event]
+        events: [...state.events, action.event]
       };
     case "REMOVE_EVENT":
-      return state.filter(({ id }) => {
+      let eventsModifiedRemove = state.events.filter(({ id }) => {
         return id !== action.id;
       });
+      return {
+        ...state,
+        events:eventsModifiedRemove
+      }
     case "EDIT_EVENT":
-      return state.map(e => {
+      let eventsModifiedEdit = state.events
+      .map(e => {
         if (e.id === action.id) {
           return {
             ...e,
@@ -50,6 +50,10 @@ export const eventsReducer = (state = eventReducerDefaultState, action) => {
           return e;
         }
       });
+      return {
+        ...state,
+        events:eventsModifiedEdit
+      }
     default:
       return state;
   }

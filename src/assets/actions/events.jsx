@@ -85,15 +85,4 @@ export const editEventDb = (id, updates) => {
       });
   };
 };
-//GET EVENT BY ID
-// export const getEventById = (id) =>{
-//   return dispatch =>{
-//     db.collection("events")
-//       .doc(props.match.params.id)
-//       .get()
-//       .then(snap => {
-//         return snap.data();
-//       });
-//   }
-// }
 /***********************************/
