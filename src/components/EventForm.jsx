@@ -9,9 +9,9 @@ export default class EventForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: props.expense ? props.expense.description : "",
-      startDate: props.expense ? moment(props.expense.createdAt) : moment(),
-      endDate: props.expense ? moment(props.expense.createdAt) : moment(),
+      description: props.event ? props.event.description : "",
+      startDate: props.event ? moment(props.event.startDate) : moment(),
+      endDate: props.vent ? moment(props.event.endDate) : moment(),
       error: ""
     };
   }

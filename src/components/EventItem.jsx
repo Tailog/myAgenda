@@ -1,11 +1,13 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import moment from "moment";
 
-const EventItem = ({ description, startDate, endDate }) => {
+const EventItem = ({ description, startDate, endDate,id }) => {
   return (
     <div>
-      <h3>{description}</h3>
+      <Link to={`/edit/${id}`}>
+        <h3>{description}</h3>
+      </Link>
       <p>
         {moment.unix(startDate).format("DD-MM-YY")}
         -----{moment.unix(endDate).format("DD-MM-YY")}

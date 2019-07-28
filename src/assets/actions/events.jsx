@@ -45,10 +45,10 @@ export const addEventDb = ({description = "",startDate=0,endDate=0}) => {
   return dispatch => {
     db.collection("events")
       .add(eventData)
-      .then(snap => {
-        let id = snap.id;
-        dispatch(addEvent({ ...eventData, id }));
-      });
+      // .then(snap => {
+      //   let id = snap.id;
+      //   dispatch(addEvent({ ...eventData, id }));
+      // });
   };
 };
 
