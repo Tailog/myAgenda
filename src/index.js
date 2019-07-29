@@ -6,6 +6,8 @@ import AppRouter from "./assets/routes/AppRoute.jsx";
 
 //Font
 import "typeface-roboto";
+//Style
+import "./assets/style/css/App.css"
 
 
 //Create Store
