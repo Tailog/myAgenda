@@ -46,14 +46,16 @@ const HeaderNav = (props) => {
           { title: "Calendar", ref: "/" },
           { title: "Create Event", ref: "/create" }
         ].map((text, index) => (
-          <Link href={text.ref} className={classes.link}>
-            <ListItem button key={text.title}>
+          <Link key={text.title} href={text.ref} className={classes.link}>
+            <ListItem button>
               {index === 0}
               <ListItemIcon>
                 {index === 0 ? (
                   <CalendarToday className={classes.iconColor} />
                 ) : null}
-                {index === 1 ? <AddRounded className={classes.iconColor} /> : null}
+                {index === 1 ? (
+                  <AddRounded className={classes.iconColor} />
+                ) : null}
               </ListItemIcon>
               <ListItemText primary={text.title} />
             </ListItem>

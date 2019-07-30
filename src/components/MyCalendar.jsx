@@ -51,7 +51,7 @@ class MyCalendar extends Component {
     let days = []
       for (let i = 0; i < 7; i++) {
         days.push(
-          <div>
+          <div key={i}>
           {moment(startDate)
               .add(i, "d")
               .format(dateFormat)}
