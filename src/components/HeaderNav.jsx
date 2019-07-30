@@ -1,5 +1,6 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from 'prop-types';
+import { withStyles } from "@material-ui/core/styles";
 /*****************CORE COMPONENTS **********/
 import {
   Drawer,
@@ -15,45 +16,11 @@ import {
 /********************ICONS *******************/
 import AddRounded from "@material-ui/icons/AddCircleRounded";
 import CalendarToday from "@material-ui/icons/CalendarToday";
-/*****************COLOR  ******************/
-import {
-  primary,
-  secondary,
-  tertiary,
-  textColor
-} from "./../assets/style/color/colorPalette";
+/*****************STYLE******************/
+import style from "../assets/style/css/style"
 
-const useStyles = makeStyles(() => ({
-  list: {
-    width: 250,
-    height: "100%",
-    backgroundColor: tertiary
-  },
-  xl: {
-    fontSize: "48px",
-    color: textColor
-  },
-  sm:{
-    color: textColor
-  },
-  header: {
-    display: "flex",
-    alignItems: "center",
-    backgroundColor: primary,
-    padding: "5px"
-  },
-  title: {
-    flexGrow: "1",
-    textAlign: "center",
-    color: textColor
-  },
-  link:{
-    color: textColor
-  }
-}));
-
-const HeaderNav = () => {
-  const classes = useStyles();
+const HeaderNav = (props) => {
+  const {classes} = props;
   const [state, setState] = React.useState({
     left: false
   });
@@ -84,9 +51,9 @@ const HeaderNav = () => {
               {index === 0}
               <ListItemIcon>
                 {index === 0 ? (
-                  <CalendarToday className={classes.sm} />
+                  <CalendarToday className={classes.iconColor} />
                 ) : null}
-                {index === 1 ? <AddRounded className={classes.sm} /> : null}
+                {index === 1 ? <AddRounded className={classes.iconColor} /> : null}
               </ListItemIcon>
               <ListItemText primary={text.title} />
             </ListItem>
@@ -114,4 +81,9 @@ const HeaderNav = () => {
   );
 };
 
-export default HeaderNav;
+HeaderNav.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(style)(HeaderNav);
+
