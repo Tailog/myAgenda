@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 /**STYLE**/
 import style from "../assets/style/css/style";
 import { withStyles } from "@material-ui/styles";
+import "./../assets/style/css/calendar.css";
 /**ICONS**/
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowForward from "@material-ui/icons/ArrowForward";
+import EventItem from "./EventItem";
 
 class MyCalendar extends Component {
   constructor(props) {
@@ -33,40 +35,83 @@ class MyCalendar extends Component {
     const dateFormat = "MMMM YYYY";
     const { classes } = this.props;
     return (
-      <div className={classes.headerCalendarMain}>
-        <div onClick={this.subtractMonth.bind(this)}>
-          <ArrowBack />
+      <div className="header row flex-middle">
+        <div className="col col-start">
+          <div className="icon" onClick={this.subtractMonth.bind(this)}>
+            <ArrowBack />
+          </div>
         </div>
-        <h3>{this.state.currentDate.format(dateFormat)}</h3>
-        <div onClick={this.addMonth.bind(this)}>
-          <ArrowForward />
+        <div className="col col-center">
+          <span>{this.state.currentDate.format(dateFormat)}</span>
+        </div>
+        <div className="col col-end" onClick={this.nextMonth}>
+          <div className="icon" onClick={this.addMonth.bind(this)}>
+            <ArrowForward />
+          </div>
         </div>
       </div>
     );
   }
-  renderWeekDay(){
+  renderWeekDay() {
     const dateFormat = "ddd";
-    const { classes } = this.props;
-    const startDate = moment(this.state.currentDate).startOf('month');
-    let days = []
-      for (let i = 0; i < 7; i++) {
-        days.push(
-          <div key={i}>
+    const days = [];
+    let startDate = moment(this.state.currentDate).startOf("week");
+    for (let i = 0; i < 7; i++) {
+      days.push(
+        <div className="col col-center" key={i}>
           {moment(startDate)
-              .add(i, "d")
-              .format(dateFormat)}
+            .add(i, "d")
+            .format(dateFormat)}
+        </div>
+      );
+    }
+    return <div className="days row">{days}</div>;
+  }
+  renderCells() {
+    const { currentDate } = this.state;
+    const monthStart = moment(currentDate).startOf("month");
+    const monthEnd = moment(currentDate).endOf("month");
+    const startDate = moment(monthStart).startOf("week");
+    const endDate = moment(monthEnd).endOf("week");
+
+    const dateFormat = "D";
+    const rows = [];
+
+    let days = [];
+    let day = startDate;
+
+    let formattedDate = "";
+
+    while (day <= endDate) {
+      for (let i = 0; i < 7; i++) {
+        formattedDate = moment(day).format(dateFormat);
+        days.push(
+          <div key={day} className="col cell">
+            <span>{formattedDate}</span>
           </div>
-        )
+        );
+        day.add(1, "d");
       }
-      return <div>{days}</div>
+      rows.push(
+        <div className="row" key={day}>
+          {days}
+        </div>
+      );
+      days = [];
+    }
+    return <div className="body">{rows}</div>;
   }
   render() {
     return (
-    <div>
-      {this.renderHeader()}
-      {this.renderWeekDay()}
-    </div>
-    )
+      <div>
+        <div className="calendar">
+          {this.renderHeader()}
+          {this.renderWeekDay()}
+          {this.renderCells()}
+        </div>
+        <EventItem />
+      </div>
+    );
   }
 }
 MyCalendar.propTypes = {
