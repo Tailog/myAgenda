@@ -14,7 +14,8 @@ class MyCalendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentDate: moment()
+      currentDate: moment(),
+      selectedDate : moment()
     };
   }
   subtractMonth() {
@@ -109,7 +110,7 @@ class MyCalendar extends Component {
           {this.renderWeekDay()}
           {this.renderCells()}
         </div>
-        <EventItem />
+        <EventItem startDate = {this.state.selectedDate}/>
       </div>
     );
   }
