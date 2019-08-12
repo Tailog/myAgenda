@@ -86,8 +86,14 @@ class MyCalendar extends Component {
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         formattedDate = moment(day).format(dateFormat);
+        let cloneDay = moment(day);
         days.push(
-          <div key={day} className="col cell">
+          <div key={day} className="col cell" onClick={()=>{
+            this.setState(()=>{
+              return {
+                selectedDate : cloneDay
+              }
+          })}}>
             <span>{formattedDate}</span>
           </div>
         );
@@ -110,7 +116,7 @@ class MyCalendar extends Component {
           {this.renderWeekDay()}
           {this.renderCells()}
         </div>
-        <EventItem startDate = {this.state.selectedDate}/>
+        <EventItem selectedDate = {this.state.selectedDate}/>
       </div>
     );
   }

@@ -17,7 +17,7 @@ class App extends Component {
     super(props);
     this.shouldComponentRender = this.shouldComponentRender.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     const { fetchEventsAction } = this.props;
     fetchEventsAction();
   }
